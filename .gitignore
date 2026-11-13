@@ -1,10 +1,11 @@
-# Public GitHub allowlist: only the production website and root README.
+# Public repository: production files and the root README only.
 /*
 !/.gitignore
+!/.gitattributes
 !/README.md
 !/dist/
 
-# Only these built browser files are public.
+# Only the compiled website is public.
 /dist/*
 !/dist/index.html
 !/dist/style.css
