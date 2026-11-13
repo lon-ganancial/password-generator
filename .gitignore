@@ -1,0 +1,12 @@
+# Public GitHub allowlist: only the production website and root README.
+/*
+!/.gitignore
+!/README.md
+!/dist/
+
+# Only these built browser files are public.
+/dist/*
+!/dist/index.html
+!/dist/style.css
+!/dist/app.js
+!/dist/password_generator.wasm

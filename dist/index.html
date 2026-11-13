@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f7f9">
+  <meta name="description" content="Generate a secure password, with simple options when you need them.">
+  <title>Password Generator — Lon Ganancial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="stage">
+    <section class="card" aria-labelledby="title">
+      <h1 id="title">Password generator</h1>
+
+      <div class="result" aria-label="Generated password">
+        <div class="result-top">
+          <output id="password" class="password" aria-live="off"><span class="password-text"></span></output>
+          <button id="copy" class="copy" type="button" aria-label="Copy password" title="Copy password">
+            <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><path id="copyIcon" d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+          </button>
+        </div>
+        <div class="strength" id="strength" data-level="4" aria-label="Estimated password strength">
+          <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><path d="M12 2 3 6v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V6l-9-4zm-1.3 14.5-3.5-3.5 1.41-1.41 2.09 2.08 4.7-4.7 1.41 1.42-6.11 6.11z"/></svg>
+          <span id="strengthText">Strong password</span>
+        </div>
+      </div>
+
+      <button id="generate" class="generate" type="button">
+        <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><path d="M17.65 6.35A7.95 7.95 0 0 0 12 4a8 8 0 1 0 7.93 9h-2.02A6 6 0 1 1 12 6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+        Generate password
+      </button>
+      <p id="error" class="error" role="alert"></p>
+
+      <div class="customize">
+        <button class="disclosure" id="customizeToggle" type="button" aria-controls="customizePanel" aria-expanded="false">
+          <span>Customize password</span>
+          <svg viewBox="0 0 24 24" class="chevron" aria-hidden="true"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
+        </button>
+        <div id="customizePanel" class="expandable" aria-hidden="true" inert>
+          <div class="expandable-inner">
+            <div class="custom-panel">
+              <div class="setting-row">
+                <label class="setting-label" for="length">Password length</label>
+                <span class="setting-value"><span id="lengthValue">20</span> characters</span>
+              </div>
+              <input class="range" id="length" type="range" min="8" max="64" value="20" aria-label="Password length">
+              <div class="endpoints" aria-hidden="true"><span>8</span><span>64</span></div>
+
+              <div class="more">
+                <button class="disclosure" id="moreToggle" type="button" aria-controls="morePanel" aria-expanded="false">
+                  <span>More options</span>
+                  <svg viewBox="0 0 24 24" class="chevron" aria-hidden="true"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
+                </button>
+                <div id="morePanel" class="expandable" aria-hidden="true" inert>
+                  <div class="expandable-inner">
+                    <div class="advanced">
+                      <div class="checks">
+                        <label class="check"><input type="checkbox" id="upper" checked> Uppercase</label>
+                        <label class="check"><input type="checkbox" id="lower" checked> Lowercase</label>
+                      </div>
+                      <div>
+                        <div class="setting-row">
+                          <label class="setting-label" for="numbers">Maximum numbers</label>
+                          <span class="setting-value" id="numbersValue">4</span>
+                        </div>
+                        <input class="range" id="numbers" type="range" min="0" max="20" value="4" aria-label="Maximum numbers">
+                      </div>
+                      <div>
+                        <div class="setting-row">
+                          <label class="setting-label" for="symbols">Maximum symbols</label>
+                          <span class="setting-value" id="symbolsValue">2</span>
+                        </div>
+                        <input class="range" id="symbols" type="range" min="0" max="20" value="2" aria-label="Maximum symbols">
+                      </div>
+                      <label class="check similar"><input type="checkbox" id="ambiguous"> Avoid similar characters</label>
+                      <p class="note">Maximum counts, not exact. Set to 0 to exclude.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <p class="attribution">by <a href="https://longanancial.com">LonGanancial</a></p>
+  </main>
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true">
+    <svg viewBox="0 0 24 24" class="icon" aria-hidden="true"><path id="toastIcon" d="M9 16.17 4.83 12 3.41 13.41 9 19l12-12-1.41-1.41z"/></svg>
+    <span id="toastText"></span>
+  </div>
+  <div class="sr-only" role="status" aria-live="polite" id="announcement"></div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
